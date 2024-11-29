@@ -1,2 +1,58 @@
-# Report
-# Author: Selen Gizlice
+---
+title: "FinalProject"
+author: "Selen Gizlice"
+date: "2024-11-13"
+output: pdf_document
+---
+## Read in data
+
+```{r, include=FALSE}
+
+library(tidyverse)
+library(ggplot2)
+
+flights <- read_csv("Source Data/flights.csv")
+airlines <- read_csv("Source Data/airlines.csv")
+airports <- read_csv("Source Data/airports.csv")
+```
+
+## Get a feel for the data
+
+```{r}
+summary(flights)
+
+delays <- flights %>% filter(ARRIVAL_DELAY > 0)
+
+delays %>%
+  count(AIRLINE) %>%
+  ggplot(aes(x = AIRLINE, y = n)) +
+  geom_col() +
+  labs(x = "Airline", y = "Number of Flights") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
+
+
+delays %>%
+  count(ORIGIN_AIRPORT) %>%
+  ggplot(aes(x = ORIGIN_AIRPORT, y = n)) +
+  geom_col() +
+  labs(x = "Origin", y = "Number of Flights") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+ggplot(flights, aes(AIRLINE)) + geom_histogram(stat="count")
+
+ggplot(flights, aes(x = AIRLINE)) +
+  geom_bar()
+
+ggplot(flights,aes(AIRLINE,total)) + geom_col() + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
