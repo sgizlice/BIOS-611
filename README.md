@@ -2,7 +2,7 @@ Hi, this is my 611 Data Science Project.
 
 Create a docker container by running 
 ```{r}
-docker build . bios-611
+docker build . -t bios-611
 ```
 
 Then create RStudio browser by running:
