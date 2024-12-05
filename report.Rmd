@@ -4,55 +4,46 @@ author: "Selen Gizlice"
 date: "2024-11-13"
 output: pdf_document
 ---
-## Read in data
-
-```{r, include=FALSE}
-
-library(tidyverse)
-library(ggplot2)
-
-flights <- read_csv("Source Data/flights.csv")
-airlines <- read_csv("Source Data/airlines.csv")
-airports <- read_csv("Source Data/airports.csv")
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
 ```
 
-## Get a feel for the data
+## Read in original dataset and plot
 
-```{r}
-summary(flights)
+I originally found this dataset on Kaggle and was interested in exploring flight delays information and the wide variety of variables that this dataset contained. 
 
-delays <- flights %>% filter(ARRIVAL_DELAY > 0)
+Then I created my first plot using the original dataset and immediately realized that the data was not real because it only had five origin airports and they all had the same number of flights. I decided that I wanted to find a real dataset so that I had a chance of finding something interesting. I found another dataset on Kaggle that also had flight delays data. 
 
-delays %>%
-  count(AIRLINE) %>%
-  ggplot(aes(x = AIRLINE, y = n)) +
-  geom_col() +
-  labs(x = "Airline", y = "Number of Flights") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
+![](figures/fake_data_origin.png)
 
 
-delays %>%
-  count(ORIGIN_AIRPORT) %>%
-  ggplot(aes(x = ORIGIN_AIRPORT, y = n)) +
-  geom_col() +
-  labs(x = "Origin", y = "Number of Flights") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+## Read in new data
 
-ggplot(flights, aes(AIRLINE)) + geom_histogram(stat="count")
+I read in the new data that at least appears to be real. It is made up of three datasets, flights, airlines, and airports. The flights dataset contains the majority of the information about the flight delays. The flights dataset only has the abbreviated airline and airport names so those have to be retreived from airlines and airports if that information is desired.
 
-ggplot(flights, aes(x = AIRLINE)) +
-  geom_bar()
+## Explore airlines
 
-ggplot(flights,aes(AIRLINE,total)) + geom_col() + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+First I hypothesized that certain airlines may have more delays that others. I suspected budget airlines would have the highest percentage of delays. First I graphed the number of delayed flights per airline and then the percentage of on time versus delayed flights per airline.
 
-```
+![](figures/flights_per_airline.png)
+![](figures/percent_delays_airline.png)
+My hypothesis appears to be correct as Spirit and Frontier have the highest percentage of delays. I was interested to see that Delta has the least delays.
 
-## Including Plots
+## Explore months
 
-You can also embed plots, for example:
+Next, I suspected certain months may have more delays than others. I thought that November and December would have the highest percentage of delays because of the holidays.
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+![](figures/flights_per_month.png)
+![](figures/percent_delays_month.png)
+I was surprised to see that July had the most flights for the entire year. It makes sense because of summer but I thought that the Thanksgiving and Christmas would mean November and December would have the most flights. I was also surprised to see that February and June have the highest percentages of delays, not really sure why that would be. Perhaps weather in February but that would not hold for June.
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+## Explore origin airport
+
+The last variable that I was interested in exploring was origin airport. I hypothesized that airports such as Denver that get a lot of snow may have a higher percentage of delays.
+
+![](figures/delay_by_airport.png)
+![](figures/percent_delays_origin.png)
+Unsurprisingly, Atlanta has the most delays but it is also the largest airport so this doesn't tell us that much.
+
+
