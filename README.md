@@ -21,6 +21,7 @@ After finding out the original dataset was fake, I found a new dataset. Dowload 
 Once the data is downloaded, create the final report by running the following command in your terminal in RStudio.
 
 ```{r}
+cd working
 make report.html
 ```
 
