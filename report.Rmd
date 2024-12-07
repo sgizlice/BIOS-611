@@ -2,7 +2,7 @@
 title: "FinalProject"
 author: "Selen Gizlice"
 date: "2024-11-13"
-output: pdf_document
+output: html_document
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -11,7 +11,7 @@ library(knitr)
 
 ## Read in original dataset and plot
 
-I originally found this dataset on Kaggle and was interested in exploring flight delays information and the wide variety of variables that this dataset contained. 
+Looking through the data available on Kaggle, I decided that I was interested in exploring the data available related to flight delays. I originally found a dataset on Kaggle with a wide variety of variables about flight delays and decided to use it for my project.
 
 Then I created my first plot using the original dataset and immediately realized that the data was not real because it only had five origin airports and they all had the same number of flights. I decided that I wanted to find a real dataset so that I had a chance of finding something interesting. I found another dataset on Kaggle that also had flight delays data. 
 
@@ -27,12 +27,12 @@ I read in the new data that at least appears to be real. It is made up of three 
 First I hypothesized that certain airlines may have more delays that others. I suspected budget airlines would have the highest percentage of delays. First I graphed the number of delayed flights per airline and then the percentage of on time versus delayed flights per airline.
 
 ![](figures/flights_per_airline.png)
-![](figures/percent_delays_airline.png)
-My hypothesis appears to be correct as Spirit and Frontier have the highest percentage of delays. I was interested to see that Delta has the least delays.
+![](figures/percent_delays_airlines.png)
+My hypothesis appears to be correct as Spirit and Frontier have the highest percentage of delays. I was interested to see that Delta has the lowest percentage of delays.
 
 ## Explore months
 
-Next, I suspected certain months may have more delays than others. I thought that November and December would have the highest percentage of delays because of the holidays.
+Next, I suspected certain months may have more delays than others. I thought that November and December would have the highest percentage of delays because of the holidays. First I created a plot to see which months have the most total number of flights and then looked at the percentages of delays.
 
 ![](figures/flights_per_month.png)
 ![](figures/percent_delays_month.png)
@@ -40,10 +40,10 @@ I was surprised to see that July had the most flights for the entire year. It ma
 
 ## Explore origin airport
 
-The last variable that I was interested in exploring was origin airport. I hypothesized that airports such as Denver that get a lot of snow may have a higher percentage of delays.
+The last variable that I was interested in exploring was origin airport. I hypothesized that airports such as Denver that get a lot of snow may have a higher percentage of delays. I looked at overall number of delays and then the percentage of delays by airport.
 
 ![](figures/delay_by_airport.png)
 ![](figures/percent_delays_origin.png)
-Unsurprisingly, Atlanta has the most delays but it is also the largest airport so this doesn't tell us that much.
+Unsurprisingly, Atlanta has the most delays but it is also the largest airport so this doesn't tell us that much. A lot of the airports have similar proportions of delays. Some of the origin airports with the highest percentage of delays are BWI, CLT, DEN and ORD.
 
 
