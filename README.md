@@ -1,6 +1,6 @@
 Hi, this is my 611 Data Science Project. 
 
-First download the files from this github site. I 
+First download the files from this github site.
 
 Then create a docker container by running the following command in your terminal. This command should be run after cd-ing into the folder where you put the files downloaded from github.
 ```{r}
