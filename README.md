@@ -7,9 +7,11 @@ Then create a docker container by running the following command in your terminal
 docker build . -t project-env
 ```
 
+Once the Docker container has been built, navigate to Docker and go to Settings in the top right hand corner. Then go to Resources and increase the Memory limit to 8 GB if it is not already. Based on the following stackoverflow post (which I will be trusting without question), you have to increase the memory in your Docker and can not just do it with a command because the command is just for the individual container and not for Docker itself: https://stackoverflow.com/questions/44533319/how-to-assign-more-memory-to-docker-container
+
 Then create RStudio browser by running:
 ```{r}
-docker run --rm -tidp 8787:8787 -v .:/home/rstudio/working alectries/univr
+docker run --rm -tidp 8787:8787 -v .:/home/rstudio/working -it --memory="8g" project-env
 ```
 
 Visit http://localhost:8787 to open RStudio. The username is rstudio and the password is login.
