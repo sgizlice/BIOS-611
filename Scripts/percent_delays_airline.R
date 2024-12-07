@@ -6,10 +6,10 @@ joined_status <- read_csv("derived_data/joined_status.csv")
 the_plot <- joined_status %>%
   group_by(LONGNAME, delay) %>%
   summarize(count = n()) %>%
-  ggplot(aes(x = LONGNAME, y = count, fill = factor(delay))) +
-  geom_col(position = "fill") +
-  labs(x = "Airline", y = "Number of Flights", fill = "Delay Category") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
-  coord_flip() 
+  group_by(LONGNAME) %>%
+  mutate(percent = count / sum(count)) %>%
+  ggplot(aes(x = percent, y = LONGNAME, fill = factor(delay))) +
+  geom_col(position = "dodge") +
+  labs(x = "Percentage of Flights", y = "Airline", fill = "Delay Category")
 
 ggsave("figures/percent_delays_airlines.png", the_plot)
