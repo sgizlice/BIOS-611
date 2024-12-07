@@ -1,17 +1,23 @@
 .PHONY: clean
 .PHONY: report
 
+report: 
+	mkdir -p derived_data
+	mkdir -p figures
+
 clean:
 	rm -rf derived_data
 	rm -rf figures
 	rm -rf final
+	mkdir -p derived_data
+	mkdir -p figures
 
-report.pdf: report.Rmd \
+report.html: report.Rmd \
 figures/fake_data_origin.png figures/flights_per_airline.png\
-figures/percent_delays_airline.png figures/flights_per_month.png\
+figures/percent_delays_airlines.png figures/flights_per_month.png\
 figures/percent_delays_month.png figures/delay_by_airport.png\
 figures/percent_delays_origin.png
-	R -e "rmarkdown::render(input='report.Rmd', output_file='report.pdf', output_format='html_document')"
+	R -e "rmarkdown::render(input='report.Rmd', output_file='report.html')"
 
 
 derived_data/delays.csv: \
@@ -36,7 +42,7 @@ derived_data/delays.csv\
 Scripts/flights_per_airline.R
 	Rscript Scripts/flights_per_airline.R
 
-figures/percent_delays_airline.png:\
+figures/percent_delays_airlines.png:\
 derived_data/joined_status.csv\
 Scripts/percent_delays_airline.R
 	Rscript Scripts/percent_delays_airline.R
